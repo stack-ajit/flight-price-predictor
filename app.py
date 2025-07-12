@@ -2,11 +2,11 @@ from flask import Flask, request, render_template
 from flask_cors import cross_origin
 import sklearn
 import pickle
+import joblib
 import pandas as pd
 
 app = Flask(__name__)
-model = pickle.load(open("flight_rf.pkl", "rb"))
-
+model =joblib.load("flight_rf_compressed.pkl")
 
 
 @app.route("/")
@@ -364,7 +364,7 @@ def predict():
 
 
         
-
+    return render_template("home.html", prediction_text=f"✈️ Your Flight price is ₹ {output}")
 
     return render_template("home.html")
 
